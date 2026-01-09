@@ -1,30 +1,32 @@
-# --- PSEUDOCODE ---
-# Circle Detection
-# v1.0.0
-# 1. Import necessary libraries: OpenCV and NumPy.
-# 2. Define the path to the image file.
-# 3. Load the image from the specified path.
-# 4. Check if the image was loaded successfully; exit if not found.
-# 5. Resize the image to a consistent maximum dimension (800 pixels) to standardize Hough Circle parameters across different input images.
-# 6. Create a copy of the original image to draw the results on.
-# 7. Pre-process the image for circle detection:
-# a. Convert the image to grayscale.
-# b. Apply a heavy median blur to reduce noise, suppress small details (like a pull-tab), and smooth the metallic surface.
-# 8. Use the Hough Circle Transform (HoughCircles) to detect potential circles:
-# a. Use the HOUGH_GRADIENT method.
-# b. Define strict parameters for 'minDist', 'minRadius', and 'maxRadius' to specifically target only the large outer edge of the can.
-# c. Use Canny edge threshold (param1) and accumulator threshold (param2) suitable for the pre-processed image.
-# 9. Check if any circles were detected:
-# a. If circles are found:
-# i. Convert the circle parameters (x, y, radius) to integers.
-# ii. Sort the detected circles by radius in descending order.
-# iii. Select the largest detected circle (the first entry after sorting).
-# iv. Draw the selected circle's circumference in green and its center in red on the output image.
-# v. Print the detected center coordinates and radius.
-# b. If no circles are found:
-# i. Print an error message suggesting a parameter adjustment.
-# 10. Display the image with the drawn circle until a key is pressed.
-# 11. Close all OpenCV windows.
+"""
+Circle Detection
+v1.0.0
+--- PSEUDOCODE ---
+1. Import necessary libraries: OpenCV and NumPy.
+2. Define the path to the image file.
+3. Load the image from the specified path.
+4. Check if the image was loaded successfully; exit if not found.
+5. Resize the image to a consistent maximum dimension (800 pixels) to standardize Hough Circle parameters across different input images.
+6. Create a copy of the original image to draw the results on.
+7. Pre-process the image for circle detection:
+    a. Convert the image to grayscale.
+    b. Apply a heavy median blur to reduce noise, suppress small details (like a pull-tab), and smooth the metallic surface.
+8. Use the Hough Circle Transform (HoughCircles) to detect potential circles:
+    a. Use the HOUGH_GRADIENT method.
+    b. Define strict parameters for 'minDist', 'minRadius', and 'maxRadius' to specifically target only the large outer edge of the can.
+    c. Use Canny edge threshold (param1) and accumulator threshold (param2) suitable for the pre-processed image.
+9. Check if any circles were detected:
+    a. If circles are found:
+        i. Convert the circle parameters (x, y, radius) to integers.
+        ii. Sort the detected circles by radius in descending order.
+        iii. Select the largest detected circle (the first entry after sorting).
+        iv. Draw the selected circle's circumference in green and its center in red on the output image.
+        v. Print the detected center coordinates and radius.
+    b. If no circles are found:
+        i. Print an error message suggesting a parameter adjustment.
+10. Display the image with the drawn circle until a key is pressed.
+11. Close all OpenCV windows.
+"""
 
 import cv2
 import numpy as np
@@ -83,6 +85,7 @@ else:
 
         # Draw the big circumference on the output image (Green color, thickness 4)
         cv2.circle(output, (x, y), r, (0, 255, 0), 4)
+        print(r)
 
         # Draw the center point on the output image (Red color, filled circle)
         cv2.circle(output, (x, y), 5, (0, 0, 255), -1) # Corrected syntax for thickness argument
