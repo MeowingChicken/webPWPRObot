@@ -1,4 +1,6 @@
 # --- PSEUDOCODE ---
+# Circle Detection
+# v1.0.0
 # 1. Import necessary libraries: OpenCV and NumPy.
 # 2. Define the path to the image file.
 # 3. Load the image from the specified path.
